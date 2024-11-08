@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content%}
+<section class="login footer-padding">
+    <div class="container">
+        
+        <div class="login-section">
+            <div class="review-form">
+                <form action="" method="post">
+                    {% csrf_token %}
+                <h5 class="comment-title">Log In</h5>
+                <div class="review-inner-form ">
+                    <div class="review-form-name">
+                        <label for="username" class="form-label">username</label>
+                        <input type="text" id="username" class="form-control" placeholder="username" name="username">
+                    </div>
+                    <div class="review-form-name">
+                        <label for="password" class="form-label">Password*</label>
+                        <input type="password" id="password" class="form-control" placeholder="password" name="password">
+                    </div>
+                    <div class="review-form-name checkbox">
+                        <div class="checkbox-item">
+                            <input type="checkbox">
+                            <span class="address">
+                                Remember Me</span>
+                        </div>
+                        <div class="forget-pass">
+                            <a href="{% url 'delivery_forgot_password' %}"><p>Forgot password?</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="login-btn text-center">
+                    <input type="submit" value="Log In" class="shop-btn">
+                    <span class="shop-account">Dont't have an account ?<a href="{% url 'register_delivery_boy' %}">Sign Up
+                            Free</a></span>
+                </div>
+            </div>
+        </form>
+        </div>
+    </div>
+</section>
+{% if messages %}
+<ul>
+  {% for message in messages %}
+    <li>{{ message }}</li>
+  {% endfor %}
+</ul>
+{% endif %}
+{% endblock %}

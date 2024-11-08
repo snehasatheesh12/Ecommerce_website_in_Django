@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content%}
+<section class="login account footer-padding">
+    <div class="container">
+        {% for message in messages %}
+        <div class="alert alert-{{message.tags}}" role="alert">
+            {{message}}
+          </div>
+        {% endfor %}
+        <div class="login-section account-section">
+            <div class="review-form">
+                <form action="" method="post">
+                  {% csrf_token %}
+                <h5 class="comment-title">Create Account</h5>
+                <div class="review-form-name">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" id="username" class="form-control"  name="username">
+                </div>
+                <div class="review-form-name">
+                  <label for="username" class="form-label">First_name</label>
+                  <input type="text" id="username" class="form-control"  name="first_name">
+              </div>
+              <div class="review-form-name">
+                <label for="username" class="form-label">Last_name</label>
+                <input type="text" id="username" class="form-control" name="last_name">
+            </div>
+                <div class=" account-inner-form">
+                    <div class="review-form-name">
+                        <label for="email" class="form-label">Email*</label>
+                        <input type="email" id="email" class="form-control" name="email">
+                    </div>
+                </div>
+                <div class="review-form-name">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" id="password" class="form-control" name="password">
+                </div>
+                <div class="review-form-name">
+                    <label for="password" class="form-label"> Confirm Password</label>
+                    <input type="password" id="password" class="form-control" name="repassword">
+                </div>
+               <br>
+                <div class="login-btn text-center">
+                    <input type="submit"  class="shop-btn" value="Create an Account">
+                    <span class="shop-account">Already have an account ?<a href="{% url 'seller_login_view' %}">Log In</a></span>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+</section>
+<br>
+<br>
+
+{% endblock %}
+<style>
+    .login {
+        background: url("static/assets/images/homepage-one/login-bg.webp") no-repeat center / cover;
+    }
+</style>
+    <script>
+        $('.alert .close').on('click', function() {
+            $(this).parent().fadeOut('slow');
+        });
+</script>
+
+{% if messages %}
+    <ul>
+        {% for message in messages %}
+        <script>alert('{{message}}')</script>
+        {% endfor %}
+    </ul>
+  {% endif %}

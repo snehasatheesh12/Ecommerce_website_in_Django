@@ -1,0 +1,112 @@
+
+
+{% extends 'base.html' %}
+{% load static %}
+{% block content%}
+<section class="product-cart product footer-padding">
+    <div class="container">
+        <div class="cart-section">
+            <table>
+                <tbody>
+                    {% if not delivery %}
+                    <section class="blog about-blog footer-padding">
+                        <div class="container">
+                            <div class="blog-bradcrum">
+                                <span><a href="index.html">Home</a></span>
+                                <span class="devider">/</span>
+                                <span><a href="#">404 Not Found</a></span>
+                            </div>
+                            <div class="blog-item" data-aos="fade-up">
+                                <div class="cart-img">
+                                </div>
+                                <div class="cart-content">
+                                    <p class="content-title">No delivery person are avilable for the approval </p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    {% else %}
+                    <tr class="table-row table-top-row">
+                        <td class="table-wrapper wrapper-product">
+                            <h5 class="table-heading">Profile Picture</h5>
+                        </td>
+                        <td class="table-wrapper">
+                            <div class="table-wrapper-center">
+                                <h5 class="table-heading">Name</h5>
+                            </div>
+                        </td>
+                        <td class="table-wrapper">
+                            <div class="table-wrapper-center">
+                                <h5 class="table-heading">Vehicle Number</h5>
+                            </div>
+                        </td>
+                        <td class="table-wrapper wrapper-total">
+                            <div class="table-wrapper-center">
+                                <h5 class="table-heading">Gender</h5>
+                            </div>
+                        </td>
+                        <td class="table-wrapper">
+                            <div class="table-wrapper-center">
+                                <h5 class="table-heading">Approve</h5>
+                            </div>
+                        </td>
+                        <td class="table-wrapper">
+                            <div class="table-wrapper-center">
+                                <h5 class="table-heading">Reject</h5>
+                            </div>
+                        </td>
+                    </tr>
+                    {% for d in delivery %}
+                    <tr class="table-row ticket-row">
+
+                        <td class="table-wrapper wrapper-product">
+                            <div class="wrapper">
+                                <div class="wrapper-img">
+                                    <img src="{{ d.profile_pic.url }}"
+                                        alt="img">
+                                </div>
+                              
+                            </div>
+                            <br>
+                            <br>
+                           
+                        </td>
+                        <td class="table-wrapper">
+                            <div class="table-wrapper-center">
+                                <h5 class="heading">{{ d.user.first_name }}</h5>
+                            </div>
+                        </td>
+                        <td class="table-wrapper">
+                            <div class="table-wrapper-center">
+                                <h5 class="heading">{{ d.vehicle_number }}</h5>
+                            </div>
+                        </td>
+                        <td class="table-wrapper">
+                            <div class="table-wrapper-center">
+                                <h5 class="heading">{{ d.gender }}</h5>
+                            </div>
+                        </td>
+                        <td class="table-wrapper">
+                            <div class="table-wrapper-center">
+                               <a href="{% url 'approve_delivery_view' d.id %}" ><button type="button" class="btn btn-danger btn-lg">Approve</button></a> 
+
+                            </div>
+                        </td>
+                        <td class="table-wrapper">
+                            <div class="table-wrapper-center">
+                               <a href="{% url 'reject_seller_view' d.id %}" ><button type="button" class="btn btn-danger btn-lg">Reject</button></a> 
+
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                {% endif %}
+                </tbody>
+            </table>
+        </div>
+        <div class="wishlist-btn cart-btn">
+            <a href="{% url 'shop' %}" class="shop-btn update-btn">Back To Shop</a>
+        </div>
+    </div>
+</section>
+{% endblock%} 

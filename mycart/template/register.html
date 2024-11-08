@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content%}
+    
+
+
+<!-- Main container for styling -->
+<div class="login-container">
+    <h2 class="title">Choose Your Login</h2>
+    
+    <!-- Links styled as buttons -->
+    <div class="login-options">
+        <a href="{% url 'register_customer' %}" class="login-btn customer-btn">register as a Customer</a>
+        <a href="{% url 'register_delivery_boy' %}" class="login-btn delivery-btn">register as a Delivery Boy</a>
+    </div>
+</div>
+<!-- Custom styles -->
+<style>
+    .login-container {
+        text-align: center;
+        margin-top: 100px;
+    }
+
+    .title {
+        font-size: 28px;
+        font-weight: bold;
+        margin-bottom: 30px;
+        font-family: 'Arial', sans-serif;
+    }
+
+    .login-options {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .login-btn {
+        display: inline-block;
+        padding: 15px 30px;
+        font-size: 18px;
+        font-family: 'Arial', sans-serif;
+        text-decoration: none;
+        color: white;
+        border-radius: 5px;
+        background-color: #007bff;
+        transition: background-color 0.3s, box-shadow 0.3s;
+    }
+
+    .customer-btn {
+        background-color: #AE1C9A;
+    }
+
+    .delivery-btn {
+        background-color: #AE1C9A;
+        ;
+    }
+
+    .login-btn:hover {
+        background-color: #0056b3;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .customer-btn:hover {
+        background-color: #218838;
+    }
+
+    .delivery-btn:hover {
+        background-color: #e0a800;
+    }
+</style>
+
+    
+<br>
+<br>
+<br>
+<br>
+<br>
+br
+{% endblock %}
+
+
+    
+
+

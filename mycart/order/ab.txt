@@ -1,0 +1,29 @@
+# views.py
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
+from .models import Payment
+
+@csrf_exempt
+def receive_transaction_details(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+
+        # Extract relevant information from the transaction data
+        payment_id = data['purchase_units'][0]['payments']['captures'][0]['id']
+        payment_method = 'PayPal'  # Or extract from data if available
+        amount_paid = data['purchase_units'][0]['payments']['captures'][0]['amount']['value']
+        status = data['purchase_units'][0]['payments']['captures'][0]['status']
+        
+        # Create a Payment instance
+        payment = Payment(
+            user=request.user,  # Ensure the user is authenticated
+            payment_id=payment_id,
+            payment_method=payment_method,
+            amount_paid=amount_paid,
+            status=status
+        )
+        payment.save()  # Save the payment record
+
+        return JsonResponse({'status': 'success'})
+    return JsonResponse({'status': 'fail'}, status=400)

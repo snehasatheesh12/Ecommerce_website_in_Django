@@ -1,0 +1,125 @@
+
+
+{% extends 'base.html' %}
+{% load static %}
+{% block content%}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<section class="product-cart product footer-padding">
+    <div class="container">
+        <div class="col-md-6">
+        <div class="cart-section">
+            <div class="card">
+                <h5 class="card-header">Billing Address</h5>
+                <div class="card-body">
+                  <p class="card-text mb-0">{{order.full_name}}</p>
+                  <p class="card-text mb-0">{{order.full_address}}</p>
+                  <p class="card-text mb-0">{{order.city}},{{order.state}}</p>
+                  <p class="card-text mb-0">{{order.country}}</p>
+                  <p class="card-text mb-0">{{order.email}}</p>
+                  <p class="card-text mb-0">{{order.phone}}</p>
+                </div>
+              </div>
+              <br>
+              <br>
+              <div class="card">
+                <h5 class="card-header">Payment Method</h5>
+                <div class="card-body">
+                    <p>paypal</p>
+                </div>
+              </div>
+              <br>
+              <br>
+              <div class="card">
+                <h5 class="card-header">Review the Product</h5>
+                <div class="card-body">
+                    <div class="cart-section">
+                        <table>
+                            <tbody>
+                                {% if  not cart_items  %}
+                                <section class="blog about-blog footer-padding">
+                                    <div class="container">
+                                        <div class="blog-bradcrum">
+                                            <span><a href="index.html">Home</a></span>
+                                            <span class="devider">/</span>
+                                            <span><a href="#">404 Not Found</a></span>
+                                        </div>
+                                        <div class="blog-item" data-aos="fade-up">
+                                            <div class="cart-img">
+                                                <img src="{% static 'assets/images/homepage-one/aa12.png'%}" alt="" style="width: 50%;height:50%;margin-left: 119px;">
+                                            </div>
+                                            <div class="cart-content">
+                                                <p class="content-title">Empty! You don’t Cart any Products </p>
+                                                <a href="{% url 'shop' %}" class="shop-btn">Back to Shop</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                                {% else %}
+                                <tr class="table-row table-top-row">
+                                    <td class="table-wrapper wrapper-product">
+                                        <h5 class="table-heading">PRODUCT</h5>
+                                    </td>
+                                    <td class="table-wrapper">
+                                        <div class="table-wrapper-center">
+                                            <h5 class="table-heading">PRICE</h5>
+                                        </div>
+                                    </td>
+                                    <td class="table-wrapper">
+                                        <div class="table-wrapper-center">
+                                            <h5 class="table-heading">QUANTITY</h5>
+                                        </div>
+                                    </td>
+                                  
+                                   
+                                </tr>
+                                {% for item in cart_items %}
+            
+                                <tr class="table-row ticket-row">
+            
+                                    <td class="table-wrapper wrapper-product">
+                                        <div class="wrapper">
+                                            <div class="wrapper-img">
+                                                <img src="{{item.product.images.url}}"
+                                                    alt="img">
+                                            </div>
+                                            <div class="wrapper-content">
+                                                <a href="{{item.product.get_url }}"><h5 class="heading">{{item.product.product_name}}</h5></a>
+                                                <br>
+                                                
+                                            </div>
+                                         
+                                        </div>
+                                        <br>
+                                        <br>
+                                       
+                                    </td>
+                                    <td class="table-wrapper">
+                                        <div class="table-wrapper-center">
+                                            <h5 class="heading">{{item.product.price}}</h5>
+                                        </div>
+                                    </td>
+                                   
+                                    <td class="table-wrapper wrapper-total">
+                                        <div class="table-wrapper-center">
+                                            <h5 class="heading">{{item.quantity}}</h5>
+                                        </div>
+            
+                                    </td>
+                                    
+                                </tr>
+                                {% endfor %}
+                            {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+              </div>
+              <br>
+              <br>
+            <p>Total Price :${{ total|floatformat:2 }}</p>
+            <p>Tax :${{ tax }}</p>
+            <p>Grand Total :${{ grand_total|floatformat:2 }}</p>
+        </div>
+        
+        {% endblock%} 

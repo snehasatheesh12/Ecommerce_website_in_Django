@@ -1,0 +1,77 @@
+
+
+{% extends 'base.html' %}
+{% load static %}
+{% block content%}
+<section class="product-cart product footer-padding">
+    <div class="container">
+        <div class="cart-section">
+            <table>
+                <tbody>
+                    
+                         {% if not  orders %}
+
+                    <section class="blog about-blog footer-padding">
+                        <div class="container">
+                            <div class="blog-bradcrum">
+                                <span><a href="index.html">Home</a></span>
+                                <span class="devider">/</span>
+                                <span><a href="#">404 Not Found</a></span>
+                            </div>
+                            <div class="blog-item" data-aos="fade-up">
+                                <div class="cart-img">
+                                </div>
+                                <div class="cart-content">
+                                    <p class="content-title">No orders are avilable now </p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    {% else %}
+                    <tr class="table-row table-top-row">
+                        <td class="table-wrapper wrapper-product">
+                            <h5 class="table-heading">Order Number</h5>
+                        </td>
+                        <td class="table-wrapper">
+                            <div class="table-wrapper-center">
+                                <h5 class="table-heading">Status</h5>
+                            </div>
+                        </td>
+                        <td class="table-wrapper">
+                            <div class="table-wrapper-center">
+                                <h5 class="table-heading">amount</h5>
+                            </div>
+                        </td>
+                        
+                     
+                    </tr>
+                    {% for order in orders %}                   
+                     <tr class="table-row ticket-row">
+                        <td class="table-wrapper">
+                            <div class="table-wrapper-center">
+                                <h5 class="heading">{{ order.order_number }}</h5>
+                            </div>
+                        </td>
+                        <td class="table-wrapper">
+                            <div class="table-wrapper-center">
+                                <h5 class="heading">{{ order.status }}</h5>
+                            </div>
+                        </td>
+                        <td class="table-wrapper">
+                            <div class="table-wrapper-center">
+                                <h5 class="heading"> ${{ order.order_total }}</h5>
+                            </div>
+                        </td>
+                        
+                    </tr>
+                    {% endfor %}
+                {% endif %}
+                </tbody>
+            </table>
+        </div>
+        <div class="wishlist-btn cart-btn">
+            <a href="{% url 'shop' %}" class="shop-btn update-btn">Back To Shop</a>
+        </div>
+    </div>
+</section>
+{% endblock%} 

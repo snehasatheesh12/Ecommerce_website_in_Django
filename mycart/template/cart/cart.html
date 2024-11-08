@@ -1,0 +1,120 @@
+
+
+{% extends 'base.html' %}
+{% load static %}
+{% block content%}
+<section class="product-cart product footer-padding">
+    <div class="container">
+        <div class="cart-section">
+            <table>
+                <tbody>
+                    {% if  not cart_items  %}
+                    <section class="blog about-blog footer-padding">
+                        <div class="container">
+                            <div class="blog-bradcrum">
+                                <span><a href="index.html">Home</a></span>
+                                <span class="devider">/</span>
+                                <span><a href="#">404 Not Found</a></span>
+                            </div>
+                            <div class="blog-item" data-aos="fade-up">
+                                <div class="cart-img">
+                                    <img src="{% static 'assets/images/homepage-one/aa12.png'%}" alt="" style="width: 50%;height:50%;margin-left: 119px;">
+                                </div>
+                                <div class="cart-content">
+                                    <p class="content-title">Empty! You don’t Cart any Products </p>
+                                    <a href="{% url 'shop' %}" class="shop-btn">Back to Shop</a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    {% else %}
+                    <tr class="table-row table-top-row">
+                        <td class="table-wrapper wrapper-product">
+                            <h5 class="table-heading">PRODUCT</h5>
+                        </td>
+                        <td class="table-wrapper">
+                            <div class="table-wrapper-center">
+                                <h5 class="table-heading">PRICE</h5>
+                            </div>
+                        </td>
+                        <td class="table-wrapper">
+                            <div class="table-wrapper-center">
+                                <h5 class="table-heading">QUANTITY</h5>
+                            </div>
+                        </td>
+                        <td class="table-wrapper wrapper-total">
+                            <div class="table-wrapper-center">
+                                <h5 class="table-heading">TOTAL</h5>
+                            </div>
+                        </td>
+                        <td class="table-wrapper">
+                            <div class="table-wrapper-center">
+                                <h5 class="table-heading">ACTION</h5>
+                            </div>
+                        </td>
+                    </tr>
+                    {% for item in cart_items %}
+
+                    <tr class="table-row ticket-row">
+
+                        <td class="table-wrapper wrapper-product">
+                            <div class="wrapper">
+                                <div class="wrapper-img">
+                                    <img src="{{item.product.images.url}}"
+                                        alt="img">
+                                </div>
+                                <div class="wrapper-content">
+                                    <a href="{{item.product.get_url }}"><h5 class="heading">{{item.product.product_name}}</h5></a>
+                                    <br>
+                                    
+                                </div>
+                             
+                            </div>
+                            <br>
+                            <br>
+                           
+                        </td>
+                        <td class="table-wrapper">
+                            <div class="table-wrapper-center">
+                                <h5 class="heading">{{item.product.price}}</h5>
+                            </div>
+                        </td>
+                        <td class="table-wrapper">
+                            <div class="table-wrapper-center">
+                                <div class="quantity">
+                                    <span class="minus">
+                                        <a href="{% url 'decrement_item' item.product.id %}">-</a>
+                                    </span>
+                                    <span class="number">{{item.quantity}}</span>
+                                    <span class="plus">
+                                        <a href="{% url 'increment_item' item.product.id %}">+</a>
+                                    </span>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="table-wrapper wrapper-total">
+                            <div class="table-wrapper-center">
+                                <h5 class="heading">{{item.sub_total}}</h5>
+                            </div>
+
+                        </td>
+                        <td class="table-wrapper">
+                            <div class="table-wrapper-center">
+                               <a href="{% url 'remove_from_cart' item.product.id %}"><button type="button" class="btn btn-danger btn-lg">Remove</button></a> 
+
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                {% endif %}
+                </tbody>
+            </table>
+        </div>
+        <div class="wishlist-btn cart-btn">
+            <a href="{% url 'clear_cart'%}" class="clean-btn">Clear Cart</a>
+            <a href="{% url 'shop' %}" class="shop-btn update-btn">Back To Shop</a>
+            <a href="{% url 'place_order' %}" class="shop-btn">Proceed to Checkout</a>
+        </div>
+    </div>
+</section>
+{% endblock%} 
